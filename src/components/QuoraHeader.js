@@ -11,13 +11,30 @@ import ExpandMore from '@mui/icons-material/ExpandMore';
 import CloseIcon from "@mui/icons-material/Close";
 import { Avatar, Button, Input } from '@mui/material';
 import "react-responsive-modal/styles.css";
+import { useDispatch } from 'react-redux';
+import { addQuestion } from '../actions/questions';
+
+
 
 
 const QuoraHeader = () => {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [inputUrl, setInputUrl] = useState("");
+  const [question, setQuestion] = useState("");
   const Close = (<CloseIcon />)
+  const dispatch = useDispatch()
+
+
+  const handleClose = () => setIsModalOpen(false);
+    const handleOpen = () => setIsModalOpen(true);
+
+
+  const handleSubmit = () => {
+    dispatch(addQuestion(question, inputUrl))
+    handleClose()
+  }
+
 
   return (
     <div className="qHeader">
@@ -74,7 +91,10 @@ const QuoraHeader = () => {
           </div>
 
           <div className="modal__Field">
-            <Input type=" text" placeholder="Start your question with 'What', 'How', 'Why', etc. " />
+            <Input type=" text" placeholder="Write Your Question Here"
+              value={question}
+              onChange={(e) => setQuestion(e.target.value)}
+            />
 
             <div
               style={{
@@ -114,7 +134,11 @@ const QuoraHeader = () => {
             <button className="cancle" onClick={() => setIsModalOpen(false)}>
               Cancel
             </button>
-            <button type="submit" className="add">
+            
+            <button onClick={handleSubmit} style={{
+              backgroundColor: "black",
+              borderRadius: "20px"
+            }} size='large' variant="contained" type="submit" className="add">
               Add Question
             </button>
           </div>
