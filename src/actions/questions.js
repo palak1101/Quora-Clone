@@ -4,7 +4,7 @@ import axios from 'axios'
 export const addQuestion = (questionContent, questionUrl) => async (dispatch) => {
 
     try {
-        const base_Url = 'http://localhost:8080'
+        const base_Url = 'https://palak-quora-api.herokuapp.com'
         const res = await axios.post(`${base_Url}/api/v1/question/add`, {
             questionContent, questionUrl
         })

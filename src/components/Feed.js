@@ -10,7 +10,7 @@ const Feed = () => {
   const [questions, setQuestions] = useState([])
 
   const getQuestions = async () => {
-    const res = await axios.get('http://localhost:8080/api/v1/question/all')
+    const res = await axios.get('https://palak-quora-api.herokuapp.com/api/v1/question/all')
 
     const { question } = res.data
     setQuestions(question.reverse())
